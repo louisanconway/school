@@ -1,0 +1,24 @@
+<!-- author ben lawson (balawson@bu.edu) -->
+<!doctype html>
+
+<title>Photoshare</title>
+
+<h1>These are all the pictures with the tag: {{ tag }}</h1>
+
+
+{% for photo in photos %}
+       <img src='data:image/png;base64, {{photo[0]}}'/>
+{% endfor %}
+
+
+
+<p> Go to your <a href='/profile'>profile?</a></p>
+
+
+<ul>
+<li><a href='/upload'>Upload a photo</a> </li> 
+<li><a href='/logout'>Logout</a></li>
+<li><a href='/'>Home</a></li>
+<li><a href=createalbum>Create an album</a> </li>
+</ul>
+

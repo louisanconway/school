@@ -1,0 +1,62 @@
+<!-- author ben lawson (balawson@bu.edu) -->
+<!doctype html>
+
+<title>Photoshare</title>
+{% if name %}
+  <h1>This is the profile of: {{ name }}!</h1>
+  <h1>This picture is part of the album: {{ album }}</h1>
+{% endif %}
+
+
+
+<img src='data:image/png;base64, {{photo[0]}}'/>
+<p><font size="5">{{photo[2]}}</font></p> 
+
+{% if tags %}
+    {% for tag in tags %}
+	<a href='/{{ tag }}'>#{{ tag }}</a> 
+    {% endfor %}
+{% endif %}
+<p><p>
+
+<font size="3">Likes: {{likes}}</font>
+<p><p>
+<form action="/userpage/{{ name }}/{{ album }}/{{ photo[1] }}" method="post">
+  <button type="submit" value="Like" >Like</button>
+</form>
+<p><p>
+
+<font size="3">Users who liked this photo: 
+{% for liker in likers %}
+	<font size=“3”>{{ liker }},</font>
+    {% endfor %}
+</font>
+
+
+<form method="post" action="/userpage/{{ name }}/{{ album }}/{{ photo[1] }}">
+<label for="comment">Leave a comment:</label>
+<input type="text" name="comment" required='true' /><br />
+<input type="submit" value="Comment"/>
+</form>
+
+{% if comments %}
+    {% for comment in comments %}
+	<p><font size="3">{{comment[0]}}:{{comment[1]}}</font></p> 
+    {% endfor %}
+{% endif %}
+
+
+
+{% if message is none %}
+  <p>You should <a href='/login'>login!</a></p>
+{% else %}
+  <p> Go to your <a href='/profile'>profile?</a></p>
+{% endif %}
+
+<ul>
+<li><a href='/upload'>Upload a photo</a> </li> 
+<li><a href='/logout'>Logout</a></li>
+<li><a href='/'>Home</a></li>
+<li><a href=createalbum>Create an album</a> </li>
+</ul>
+
